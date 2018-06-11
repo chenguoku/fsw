@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>发生网——注册</title>
+<link href="register.css" rel="stylesheet"></head>
+
+<body>
+    <!--头部导航开始-->
+    <header class="header">
+        <div class="hd-content">
+            <a href="#" class="hd-logo">
+                <img src="http://www.fashengwang.com/image/logo.png" alt="">
+            </a>
+            <form action="" class="hd-select">
+                <input type="text" class="hd-input" name="question" placeholder="搜索">
+                <input type="submit" class="hd-btn">
+            </form>
+            <nav class="hd-nav">
+                <a href="#" class="hd-nav-item">首页</a>
+                <a href="#" class="hd-nav-item">我的学习</a>
+                <a href="#" class="hd-nav-item">曲智超曲智超曲智超</a>
+                <a href="javascript:void(0)" class="hd-nav-item">
+                    <img src="http://www.fashengwang.com/HeadPortrait/1/1.jpg" alt="">
+                </a>
+            </nav>
+            <div class="hd-more-wrap">
+                <div class="hd-more">
+                    <a href="#" class="hd-more-itme">我的学习</a>
+                    <a href="#" class="hd-more-itme">个人资料</a>
+                    <a href="#" class="hd-more-itme">我要讲课</a>
+                    <a href="#" class="hd-more-itme">退出</a>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!--头部导航结束-->
+    <main class="main">
+        <div class="register">
+            <form action="" class="register-left">
+                <h1 class="register-tt">发生网用户注册</h1>
+                <input type="text" name="name" class="register-input" placeholder="请输入用户名" maxlength="12">
+                <div class="register-email-wrap">
+                    <input type="text" name="email" class="register-input" placeholder="请输入邮箱" maxlength="30">
+                    <span class="send-code">发送验证码</span>
+                </div>
+                <input type="text" name="code" class="register-input" onkeyup="value=value.replace(/[^\d]/g,'')" placeholder="请输入验证码" maxlength="6">
+                <input type="password" name="passwd" class="register-input" placeholder="请输入登录密码" maxlength="16">
+                <p class="register-msg">用户名已存在</p>
+                <div class="agreement">
+                    <input type="submit" class="register-btn" value="注册">
+                    <input type="checkbox" id="agreement" checked>
+                    <label for="agreement">同意《发生网用户注册协议》</label>
+                </div>
+            </form>
+            <div class="register-bar"></div>
+            <div class="register-right">
+                <h1 class="right-tt">海量视频&nbsp;种类繁多</h1>
+                <h1 class="right-tt">随时随地&nbsp;无障观看</h1>
+                <h1 class="right-tt">评论提问&nbsp;互动学习</h1>
+                <h1 class="right-tt">云端储存&nbsp;资源共享</h1>
+            </div>
+        </div>
+    </main>
+    <!-- 版尾 -->
+    <div class="footer">
+        <div class="ft-wrap">
+            <div class="ft-left">
+                <p class="ft-tt">发生网，基于听障生打造的智能在线学习网站。</p>
+                <div class="ft-list">
+                    <a href="#" class="ft-item">意见反馈</a>
+                    <a href="#" class="ft-item">广告服务</a>
+                    <a href="#" class="ft-item">关于我们</a>
+                    <a href="#" class="ft-item">合作入口</a>
+                    <a href="#" class="ft-item">服务条款</a>
+                </div>
+                <p class="ft-copy">&copy;2017-2018 发生网 www.fashengwang.com 版权所有</p>
+            </div>
+            <div class="ft-right">
+                <p class="contact">联系我们：</p>
+                <a href="javascript:void(0)" class="ct-qq"></a>
+                <img class="ct-qq-img" src="http://www.fashengwang.com/image/weixin_01.png">
+                <a href="javascript:void(0)" class="ct-weixin"></a>
+                <img class="ct-weixin-img" src="http://www.fashengwang.com/image/weixin_01.png">
+                <a href="javascript:void(0)" class="ct-email"></a>
+                <img class="ct-email-img" src="http://www.fashengwang.com/image/weixin_01.png">
+            </div>
+        </div>
+    </div>
+    <!-- 版尾结束 -->
+<script type="text/javascript" src="register.min.js"></script></body>
+
+</html>

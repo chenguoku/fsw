@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="./video-js.css" rel="stylesheet">
+    <title>这里换成视频名字</title>
+<link href="videoPlayer.css" rel="stylesheet"></head>
+
+<body>
+    <ul class="left">
+        <h1 class="left-tt">这里是课程名称</h1>
+        <a href="#" class="active">1、阿是大师大师的奥术大师阿是大师大师的</a>
+        <a href="#">2、阿是大师大师的奥术大师阿是大师大师的</a>
+        <a href="#">3、阿是大师大师的奥术大师阿是大师大师的</a>
+        <a href="#">4、阿是大师大师的奥术大师阿是大师大师的</a>
+        <a href="#">5、阿是大师大师的奥术大师阿是大师大师的</a>
+        <a href="#">6、阿是大师大师的奥术大师阿是大师大师的</a>
+        <a href="#">7、阿是大师大师的奥术大师阿是大师大师的</a>
+    </ul>
+    <div class="right">
+        <div class="right-header">
+            <h1 class="listBtn">目录</h1>
+            <h1 class="right-hd-tt">这里是视频名字</h1>
+        </div>
+        <video id="my-video" class="video-js" controls preload="auto" data-setup="{}">
+            <source src="http://www.fashengwang.com/kecheng/video/1/5MgLec35nvfJhNPsiW9BshnDBSeRQsl1.mp4" type="video/mp4">
+            <source src="http://vjs.zencdn.net/v/oceans.webm" type="video/webm">
+            <source src="http://vjs.zencdn.net/v/oceans.ogv" type="video/ogg">
+            <p class="vjs-no-js">
+                To view this video please enable JavaScript, and consider upgrading to a web browser that
+                <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
+            </p>
+        </video>
+    </div>
+<script type="text/javascript" src="videoPlayer.min.js"></script></body>
+<script src="http://vjs.zencdn.net/5.18.4/video.min.js"></script>
+<script type="text/javascript">
+    var myPlayer = videojs('my-video');
+    videojs("my-video").ready(function () {
+        var myPlayer = this;
+        myPlayer.play();
+    });
+</script>
+</html>

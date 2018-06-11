@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fsw.mapper.MyMapper" >
+
+	<resultMap id="CommentsBaseResultMap" type="com.fsw.pojo.TbComments" >
+	    <id column="id" property="id" jdbcType="INTEGER" />
+	    <result column="user_id" property="userId" jdbcType="INTEGER" />
+	    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+	    <result column="course_id" property="courseId" jdbcType="INTEGER" />
+	    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+	    <result column="user_image" property="userImage" jdbcType="VARCHAR" />
+	    <result column="content" property="content" jdbcType="LONGVARCHAR" />
+	</resultMap>
+	<resultMap id="CourseBaseResultMap" type="com.fsw.pojo.TbCourse" >
+	    <id column="id" property="id" jdbcType="INTEGER" />
+	    <result column="name" property="name" jdbcType="VARCHAR" />
+	    <result column="teacher" property="teacher" jdbcType="VARCHAR" />
+	    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+	    <result column="type" property="type" jdbcType="VARCHAR" />
+	    <result column="image" property="image" jdbcType="VARCHAR" />
+	    <result column="user_id" property="userId" jdbcType="INTEGER" />
+	    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+	    <result column="status" property="status" jdbcType="INTEGER" />
+	    <result column="collection" property="collection" jdbcType="INTEGER" />
+	    <result column="details" property="details" jdbcType="LONGVARCHAR" />
+	</resultMap>
+  
+
+	<select id="getCourseListType3" resultMap="CourseBaseResultMap">
+	 	SELECT *
+		FROM tb_course c
+		WHERE c.type=3
+		ORDER BY collection DESC
+		LIMIT 0,4
+	</select>
+	<select id="getCourseListType5" resultMap="CourseBaseResultMap">
+	 	SELECT *
+		FROM tb_course c
+		WHERE c.type=5
+		ORDER BY collection DESC
+		LIMIT 0,4
+	</select>
+	<select id="getCourseListType" resultMap="CourseBaseResultMap">
+	 	SELECT *
+		FROM tb_course c
+		ORDER BY collection DESC
+		LIMIT 0,4
+	</select>
+	<select id="getCourseByInteresting" parameterType="java.lang.String" resultMap="CourseBaseResultMap">
+	 	SELECT *
+		FROM tb_course c
+		WHERE ${interestingSql}
+		ORDER BY collection DESC
+		LIMIT 0,8
+	</select>
+	<select id="selectCourse" parameterType="java.lang.String" resultMap="CourseBaseResultMap">
+	 	SELECT *
+		FROM tb_course c
+		WHERE ${sql}
+	</select>
+	<select id="selectCourseCount" parameterType="java.lang.String" resultType="java.lang.Integer">
+	 	SELECT COUNT(*)
+		FROM tb_course c
+		WHERE ${selectCount}
+	</select>
+	<select id="selectCommentsByCourseId" parameterType="java.lang.String" resultMap="CommentsBaseResultMap">
+	 	SELECT *
+		FROM tb_comments
+		WHERE ${sql} 
+	</select>
+	<select id="selectHotComments" parameterType="java.lang.String" resultType="java.lang.Integer">
+	 	SELECT comments_id
+		FROM (
+			SELECT COUNT(*) , comments_id
+			FROM tb_next_comments
+			WHERE 
+			${sql} 
+			
+		) c
+	</select>
+	
+
+</mapper>

@@ -30,6 +30,7 @@
 	 	SELECT *
 		FROM tb_course c
 		WHERE c.type=3
+		AND c.status = 1
 		ORDER BY collection DESC
 		LIMIT 0,4
 	</select>
@@ -37,12 +38,14 @@
 	 	SELECT *
 		FROM tb_course c
 		WHERE c.type=5
+		AND c.status = 1
 		ORDER BY collection DESC
 		LIMIT 0,4
 	</select>
 	<select id="getCourseListType" resultMap="CourseBaseResultMap">
 	 	SELECT *
 		FROM tb_course c
+		WHERE c.status = 1
 		ORDER BY collection DESC
 		LIMIT 0,4
 	</select>
@@ -50,6 +53,7 @@
 	 	SELECT *
 		FROM tb_course c
 		WHERE ${interestingSql}
+		AND c.status = 1
 		ORDER BY collection DESC
 		LIMIT 0,8
 	</select>
@@ -61,7 +65,7 @@
 	<select id="selectCourseCount" parameterType="java.lang.String" resultType="java.lang.Integer">
 	 	SELECT COUNT(*)
 		FROM tb_course c
-		WHERE ${selectCount}
+		WHERE c.status = 1 AND ${selectCount}
 	</select>
 	<select id="selectCommentsByCourseId" parameterType="java.lang.String" resultMap="CommentsBaseResultMap">
 	 	SELECT *

@@ -33,6 +33,10 @@ public class IndexController {
 	private static final Logger LOGGER = LoggerFactory.getLogger(IndexController.class);
 	@RequestMapping(value="index")
 	public String findIndex(Model model, HttpServletRequest request,HttpServletResponse response) {
+
+		
+		
+		
 		
 		//热门课程查询
 		List<TbCourse> hotTypeList = courseService.getCourseListType();

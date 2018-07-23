@@ -45,4 +45,11 @@ public interface CommentsService {
 	 * @return
 	 */
 	List<TbComments> selectHotComments(String courseId,String count);
+	
+	/**
+	 * 删除评论及副评论
+	 * @param id
+	 * @return
+	 */
+	FSWResult deleteComment(String id);
 }

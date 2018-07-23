@@ -14,7 +14,7 @@
 
 <body>
     <ul class="left">
-        <h1 class="left-tt">${video.name }</h1>
+        <h1 class="left-tt">${showCourse.name }</h1>
         <c:forEach items="${videoList }" var="video" begin="0" end="${videoSize}" varStatus="status">
         
 	        <a href="${pageContext.request.contextPath }/goVideoPlayer.html?courseId=${video.courseId}&index=${status.index }"

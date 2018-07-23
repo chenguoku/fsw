@@ -24,7 +24,7 @@
             </div>
             <!-- 导航 -->
             <h3 class="select-tt">
-                <a href="#">首页</a>&gt;
+                <a href="${pageContext.request.contextPath }">首页</a>&gt;
                 <a href="#">课程查询</a>
             </h3>
             <!-- 查询条件 -->

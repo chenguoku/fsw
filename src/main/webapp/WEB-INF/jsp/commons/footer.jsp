@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!-- 版尾 -->
-    <div class="footer">
+    <footer class="footer">
         <div class="ft-wrap">
             <div class="ft-left">
                 <p class="ft-tt">发生网，基于听障生打造的智能在线学习网站。</p>
@@ -24,5 +24,5 @@
                 <img class="ct-email-img" src="${pageContext.request.contextPath }/image/login/weixin_01.png">
             </div>
         </div>
-    </div>
+    </footer>
     <!-- 版尾结束 -->

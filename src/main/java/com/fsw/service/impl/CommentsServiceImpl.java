@@ -225,4 +225,33 @@ public class CommentsServiceImpl implements CommentsService {
 		return list;
 	}
 
+
+
+	public FSWResult deleteComment(String id) {
+		FSWResult result = new FSWResult();
+		try {
+			//删除主评论
+			int deleteByPrimaryKey = commentsMapper.deleteByPrimaryKey(Integer.parseInt(id));
+			//删除副评论
+			TbNextCommentsExample example = new TbNextCommentsExample();
+			Criteria criteria = example.createCriteria();
+			criteria.andCommentsIdEqualTo(Integer.parseInt(id));
+			int deleteByExample = nextCommentsMapper.deleteByExample(example);
+			if (deleteByPrimaryKey == 0) {
+				result.setStatus(404);
+				result.setMsg("没有找到评论");
+				return result;
+			}
+			result.setStatus(200);
+			result.setMsg("成功");
+			return result;
+		} catch (Exception e) {
+			e.printStackTrace();
+			result.setStatus(500);
+			result.setMsg("服务器错误");
+			return result;
+		}
+		
+	}
+
 }

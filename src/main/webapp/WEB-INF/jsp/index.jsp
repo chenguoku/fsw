@@ -85,11 +85,11 @@
             <div class="course-wrap">
                 <div class="course-tt">
                     <h1 class="course-type">热门课程</h1>
-                    <a href="${pageContext.request.contextPath}/goSelect.html?sort=1" class="course-more">更多&gt;</a>
+                    <a href="${pageContext.request.contextPath}/goSelect.html?sort=1" target="_blank" class="course-more">更多&gt;</a>
                 </div>
                 <div class="course-item-wrap">
                     <c:forEach items="${hotTypeList }" var="hotCourse">
-                    	<a href="${pageContext.request.contextPath}/goCourseInfo.html?courseId=${hotCourse.id }" class="course-item">
+                    	<a href="${pageContext.request.contextPath}/goCourseInfo.html?courseId=${hotCourse.id }" target="_blank" class="course-item">
 	                        <div class="cur-item-img">
 	                            <img src="${pageContext.request.contextPath}${hotCourse.image}" alt="">
 	                        </div>
@@ -106,11 +106,11 @@
             <div class="course-wrap">
                 <div class="course-tt">
                     <h1 class="course-type">兴趣生活</h1>
-                    <a href="${pageContext.request.contextPath}/goSelect.html?type=4" class="course-more">更多&gt;</a>
+                    <a href="${pageContext.request.contextPath}/goSelect.html?type=4" target="_blank" class="course-more">更多&gt;</a>
                 </div>
                 <div class="course-item-wrap">
                     <c:forEach items="${type3List }" var="type3Course">
-                    	<a href="${pageContext.request.contextPath}/goCourseInfo.html?courseId=${type3Course.id }" class="course-item">
+                    	<a href="${pageContext.request.contextPath}/goCourseInfo.html?courseId=${type3Course.id }" target="_blank" class="course-item">
 	                        <div class="cur-item-img">
 	                            <img src="${pageContext.request.contextPath}${type3Course.image}" alt="">
 	                        </div>
@@ -129,11 +129,11 @@
             <div class="course-wrap">
                 <div class="course-tt">
                     <h1 class="course-type">编程开发</h1>
-                    <a href="${pageContext.request.contextPath}/goSelect.html?type=1" class="course-more">更多&gt;</a>
+                    <a href="${pageContext.request.contextPath}/goSelect.html?type=1" target="_blank" class="course-more">更多&gt;</a>
                 </div>
                 <div class="course-item-wrap">
                     <c:forEach items="${type5List }" var="type5Course">
-                    	<a href="${pageContext.request.contextPath}/goCourseInfo.html?courseId=${type5Course.id }" class="course-item">
+                    	<a href="${pageContext.request.contextPath}/goCourseInfo.html?courseId=${type5Course.id }" target="_blank" class="course-item">
 	                        <div class="cur-item-img">
 	                            <img src="${pageContext.request.contextPath}${type5Course.image}" alt="">
 	                        </div>

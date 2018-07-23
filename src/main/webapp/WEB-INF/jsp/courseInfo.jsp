@@ -20,8 +20,8 @@
         <div class="courseInfo-wrap">
             <!-- 导航 -->
             <h3 class="courseInfo-nav">
-                <a href="#">首页</a>&nbsp;&gt;&nbsp;
-                <a href="#">兴趣生活</a>&nbsp;&gt;&nbsp;
+                <a href="${pageContext.request.contextPath }">首页</a>&nbsp;&gt;&nbsp;
+                <a href="${pageContext.request.contextPath }">兴趣生活</a>&nbsp;&gt;&nbsp;
                 <span>${course.name }</span>
             </h3>
             <!-- 上方信息部分 -->

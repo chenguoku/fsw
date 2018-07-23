@@ -2,8 +2,14 @@ package com.fsw.service;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.web.multipart.MultipartFile;
+
 import com.fsw.pojo.SelectResult;
 import com.fsw.pojo.TbCourse;
+import com.fsw.utils.FSWResult;
 
 public interface CourseService {
 	/**
@@ -45,5 +51,49 @@ public interface CourseService {
 	 * @return
 	 */
 	TbCourse selectCourseById(String courseId);
+	
+	/**
+	 * 根据收藏查询课程
+	 * @return
+	 */
+	List<TbCourse> selectCourseByCollection(HttpServletRequest request,HttpServletResponse response);
+	
+	/**
+	 * 创建课程
+	 * @param name
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	FSWResult createCourse(String name,HttpServletRequest request,HttpServletResponse response);
+	
+	/**
+	 * 查询老师创建的课程
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	List<TbCourse> selectCourseByUserId(HttpServletRequest request,HttpServletResponse response);
+	
+	/**
+	 * 修改课程图片
+	 * @param imgFile
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	FSWResult updateCourseImage(TbCourse course,MultipartFile imgFile, HttpServletRequest request, HttpServletResponse response);
+	
+	/**
+	 * 修改课程信息
+	 * @param courseId
+	 * @param name
+	 * @param type
+	 * @param info
+	 * @param teacher
+	 * @param status
+	 * @return
+	 */
+	FSWResult updateCourse(TbCourse course,String name,String type,String info,String teacher,String status);
 	
 }

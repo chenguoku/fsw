@@ -1,5 +1,6 @@
 package com.fsw.controller;
 
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -8,20 +9,132 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.fsw.pojo.TbUser;
 import com.fsw.pojo.TbUserWithBLOBs;
 import com.fsw.service.UserService;
 import com.fsw.utils.FSWResult;
-import com.fsw.utils.SendEmail;
 
 @Controller
 public class UserController {
 
 	@Autowired
 	private UserService userService;
+	
+	/**
+	 * 取申请讲课页面
+	 * @return
+	 */
+	@RequestMapping("goApplyToJoin")
+	public String goApplyToJoin() {
+		return "applyToJoin";
+	}
+	
+	/**
+	 * 修改用户头像
+	 * @return
+	 */
+	@RequestMapping("updateImg")
+	public String updateImg(Model model,MultipartFile imgFile,HttpServletRequest request,HttpServletResponse response) {
+		
+		//查看是否登录了
+		TbUser user = (TbUser) request.getSession().getAttribute("loginUser");
+		if (user == null) {
+			model.addAttribute("err", "请登录，在访问个人信息！");
+			return "login";
+		}
+		
+		if (imgFile.isEmpty()) {
+			return "userInfo";
+		}
+		
+		FSWResult updateImg = userService.updateImg(imgFile, request, response);
+		
+		return "userInfo";
+	}
+	
+	/**
+	 * 修改个人信息
+	 * 包括：姓名，密码，性别，学校
+	 * @param name
+	 * @param newPasswd
+	 * @param sex  男  女
+	 * @param school
+	 * @return
+	 */
+	@RequestMapping("updateUserInfo")
+	public String updateUserInfo(Model model,String name,String oldPasswd,String newPasswd,String sex,String school,HttpServletRequest request, HttpServletResponse response) {
+		
+		//查看是否登录了
+		TbUser user = (TbUser) request.getSession().getAttribute("loginUser");
+		if (user == null) {
+			model.addAttribute("err", "请登录，在访问个人信息！");
+			return "login";
+		}
+		
+		//修改数据
+		if (name != null) {
+			String updateName = userService.updateName(name, request, response);
+			if (updateName.equals("1")) {
+				model.addAttribute("accountInfo", "用户名修改成功");
+			}else {
+				model.addAttribute("accountInfo", "用户名修改失败");
+			}
+		}
+		if (newPasswd != null) {
+			String updatePasswd = userService.updatePasswd(oldPasswd,newPasswd, request, response);
+			if (updatePasswd.equals("1")) {
+				model.addAttribute("accountInfo", "密码修改成功");
+			}else {
+				model.addAttribute("accountInfo", "密码修改失败");
+			}
+		}
+		if (sex != null) {
+			String updateSex = userService.updateSex(sex, request, response);
+			if (updateSex.equals("1")) {
+				model.addAttribute("personalInfo", "修改成功");
+			}else {
+				model.addAttribute("personalInfo", "修改失败");
+			}
+		}
+		if (school != null) {
+			String updateSchool = userService.updateSchool(school, request, response);
+			if (updateSchool.equals("1")) {
+				model.addAttribute("personalInfo", "修改成功");
+			}else {
+				model.addAttribute("personalInfo", "修改失败");
+			}
+		}
+		
+		
+		return "userInfo";
+	}
+	
+	
+	/**
+	 * 去个人信息页面
+	 * @param model
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping(value="goUserInfo")
+	public String goUserInfo(Model model,HttpServletRequest request,HttpServletResponse response) {
+		
+		//查看是否登录了
+		TbUser user = (TbUser) request.getSession().getAttribute("loginUser");
+		if (user == null) {
+			model.addAttribute("err", "请登录，在访问个人信息！");
+			return "login";
+		}
+		
+		
+				
+		return "userInfo";
+		
+	}
+	
 	
 	@RequestMapping(value="goLoginPage")
 	public String userLogin() {

@@ -4,7 +4,7 @@
 <!--头部导航开始-->
     <header class="header">
         <div class="hd-content">
-            <a href="${pageContext.request.contextPath }" class="hd-logo">
+            <a href="http://www.fashengwang.com" class="hd-logo">
                 <img src="${pageContext.request.contextPath }/image/index/logo.png" alt="">
             </a>
             <form action="goSelect.html" class="hd-select">
@@ -13,7 +13,17 @@
             </form>
             <nav class="hd-nav">
                 <a href="${pageContext.request.contextPath }" class="hd-nav-item">首页</a>
-                <a href="#" class="hd-nav-item">我的学习</a>
+                
+                <c:if test="${loginUser.type == 1 }">
+              	 	<a href="${pageContext.request.contextPath }/goMyStudy.html" target="_blank" class="hd-nav-item">我的学习</a>
+                </c:if>
+                <c:if test="${loginUser.type == 2 }">
+              	 	<a href="${pageContext.request.contextPath }/goCourseManager.html" target="_blank" class="hd-nav-item">课程管理</a>
+                </c:if>
+                <c:if test="${loginUser.type == 3 }">
+              	 	<a href="${pageContext.request.contextPath }/goMyStudy.html" target="_blank" class="hd-nav-item">我的学习</a>
+                </c:if>
+                
                 
 				<c:if test="${not empty loginUser.name}">
 					<a href="#" class="hd-nav-item">${loginUser.name }</a>
@@ -34,8 +44,8 @@
             <div class="hd-more-wrap">
                 <div class="hd-more">
                     <a href="#" class="hd-more-itme">我的学习</a>
-                    <a href="#" class="hd-more-itme">个人资料</a>
-                    <a href="#" class="hd-more-itme">我要讲课</a>
+                    <a href="${pageContext.request.contextPath }/goUserInfo.html" target="_blank" class="hd-more-itme">个人资料</a>
+                    <a href="${pageContext.request.contextPath }/goApplyToJoin.html" target="_blank" class="hd-more-itme">我要讲课</a>
                     <a href="${pageContext.request.contextPath }/exitLogin.html" class="hd-more-itme">退出</a>
                 </div>
             </div>

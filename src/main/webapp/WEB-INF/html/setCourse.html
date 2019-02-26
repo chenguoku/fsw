@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>这里是课程名称</title>
+<link href="setCourse.css" rel="stylesheet"></head>
+
+<body>
+    <header class="header">
+        <h1 class="hd-title">这里是课程名称</h1>
+    </header>
+    <div class="body-title">课程资料</div>
+    <main class="main">
+        <aside class="aside">
+            <ul class="aside-list">
+                <li>
+                    <a href="javascript:void(0)" class="active">课程资料</a>
+                </li>
+                <li>
+                    <a href="">视频管理</a>
+                </li>
+                <li>
+                    <a href="">评论管理</a>
+                </li>
+                <li>
+                    <a href="">相关素材</a>
+                </li>
+            </ul>
+        </aside>
+        <div class="body">
+            <form action="" class="body-form">
+                <!-- 名称 -->
+                <div>
+                    <label for="name">课程名称：</label>
+                    <input type="text" id="name" name="name">
+                </div>
+                <!-- 分类 -->
+                <div>
+                    <label for="type">课程分类：</label>
+                    <select name="type" id="type">
+                        <option value="分类名称">分类名称</option>
+                        <option value="分类名称">分类名称</option>
+                        <option value="分类名称">分类名称</option>
+                    </select>
+                </div>
+                <!-- logo -->
+                <div>
+                    <span class="logo-text">课程logo：</span>
+                    <img src="http://www.fashengwang.com/image/course/11.jpg" alt="" class="course-img">
+                    <span class="up-img">上传图片</span>
+                </div>
+                <!-- 详情 -->
+                <div>
+                    <label for="info">课程详情：</label>
+                    <textarea name="info" id="info"></textarea>
+                </div>
+                <!-- 教师 -->
+                <div>
+                    <label for="teacher">授课教师：</label>
+                    <input type="text" name="teacher" id="teacher">
+                </div>
+                <div>
+                    <label for="on-off">是否上线：</label>
+                    <select name="on-off" id="on-off">
+                        <option value="on">上线</option>
+                        <option value="off">下线</option>
+                    </select>
+                </div>
+                <input type="submit" value="保存">
+            </form>
+        </div>
+        <!-- 修改头像弹窗 -->
+        <form action="" class="alert">
+            <div class="alert-body-wrap">
+                <h1>修改logo</h1>
+                <img id="showImg" src="http://www.fashengwang.com/image/course/11.jpg" alt="">
+                <div class="alert-btn">
+                    <span>选择图片</span>
+                    <input type="file" id="imgFile" accept="image/*" name="imgFile">
+                    <input class="imgFile-btn" type="submit" value="保存">
+                </div>
+            </div>
+        </form>
+    </main>
+<script type="text/javascript" src="setCourse.min.js"></script></body>
+
+</html>

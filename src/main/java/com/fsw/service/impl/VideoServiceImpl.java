@@ -41,7 +41,7 @@ public class VideoServiceImpl implements VideoService {
 			example.setOrderByClause("findex asc");
 			List<TbVideo> list = videoMapper.selectByExampleWithBLOBs(example);
 			if (list == null || list.size() == 0) {
-				return FSWResult.build(404, "没有找到课程", null);
+				return FSWResult.build(404, "没有找到视频", null);
 			}
 			return FSWResult.build(200, "video", list);
 		} catch (Exception e) {

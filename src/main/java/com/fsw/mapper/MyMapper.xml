@@ -82,6 +82,11 @@
 			
 		) c
 	</select>
+	<select id="selectMaxTestPage" parameterType="java.lang.String" resultType="java.lang.Integer">
+	 	SELECT id
+		FROM tb_test_page 
+		${sql} 
+	</select>
 	
 
 </mapper>

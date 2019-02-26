@@ -1,5 +1,6 @@
 package com.fsw.controller;
 
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -55,8 +56,17 @@ public class CommentController {
 	
 	@RequestMapping(value="select/course/comment")
 	@ResponseBody
-	public SelectResult selectCourseComment(String courseId,
-			@RequestParam(defaultValue="5")String count ,@RequestParam(defaultValue="1")String pageNow) {
+	public SelectResult selectCourseComment(@RequestParam(value="courseId")String courseId,
+			@RequestParam(value="count",defaultValue="5")String count ,@RequestParam(value="pageNow",defaultValue="1")String pageNow) {
+		
+		if (courseId == null || courseId =="") {
+			return null;
+		}
+		if("0".equals(courseId)) {
+			
+			SelectResult selectAllComments = commentsService.selectAllComments(10+"",pageNow);
+			return selectAllComments;
+		}
 		
 		pageNow = (Integer.parseInt(pageNow)-1)+"";
 		

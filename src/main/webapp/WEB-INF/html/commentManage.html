@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>这里是课程名称</title>
+<link href="commentManage.css" rel="stylesheet"></head>
+
+<body>
+    <!-- 课程id给我 -->
+    <input type="hidden" value="1" class="courseId">
+    <header class="header">
+        <h1 class="hd-title">这里是课程名称</h1>
+    </header>
+    <div class="body-title">评论管理</div>
+    <main class="main">
+        <aside class="aside">
+            <ul class="aside-list">
+                <li>
+                    <a href="">课程资料</a>
+                </li>
+                <li>
+                    <a href="">视频管理</a>
+                </li>
+                <li>
+                    <a href="javascript:void(0)" class="active">评论管理</a>
+                </li>
+                <li>
+                    <a href="">相关素材</a>
+                </li>
+            </ul>
+        </aside>
+        <div class="body">
+            <div class="body-head">
+                <span class="videoAdd">打印</span>
+            </div>
+            <!-- 十条数据 -->
+            <!--startprint-->
+            <table></table>
+            <!--endprint-->
+            <ul class="page" id="page"></ul>
+        </div>
+    </main>
+<script type="text/javascript" src="commentManage.min.js"></script></body>
+
+</html>

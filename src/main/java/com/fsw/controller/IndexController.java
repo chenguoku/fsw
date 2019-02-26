@@ -15,13 +15,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fsw.pojo.TbCourse;
-import com.fsw.pojo.TbUser;
 import com.fsw.pojo.TbUserWithBLOBs;
 import com.fsw.service.CourseService;
 import com.fsw.service.UserService;
 import com.fsw.utils.FSWResult;
 import com.fsw.utils.FSWUtils;
-import com.fsw.utils.JsonUtils;
 
 @Controller
 public class IndexController {
@@ -31,13 +29,20 @@ public class IndexController {
 	@Autowired
 	private CourseService courseService;
 	private static final Logger LOGGER = LoggerFactory.getLogger(IndexController.class);
+	
+	@RequestMapping(value="adviceOur")
+	public String adviceOur() {
+		return "adviceOur";
+	}
+	
+	@RequestMapping(value="aboutUs")
+	public String aboutUs() {
+		return "aboutUs";
+	}
+	
 	@RequestMapping(value="index")
 	public String findIndex(Model model, HttpServletRequest request,HttpServletResponse response) {
 
-		
-		
-		
-		
 		//热门课程查询
 		List<TbCourse> hotTypeList = courseService.getCourseListType();
 		//兴趣生活
@@ -111,10 +116,7 @@ public class IndexController {
 	
 	@RequestMapping("exitLogin")
 	public String exitLogin(HttpServletRequest request , HttpServletResponse response) {
-		
 		request.getSession().removeAttribute("loginUser");
-		
-		
 		return "redirect:index.html";
 		
 	}

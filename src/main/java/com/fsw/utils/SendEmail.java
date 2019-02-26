@@ -93,10 +93,8 @@ public class SendEmail {
 	            Transport.send(message);  
 	            //System.out.println("发送成功");
 	        } catch (AddressException e) {  
-	            // TODO Auto-generated catch block  
 	            e.printStackTrace();  
 	        } catch (MessagingException e) {  
-	            // TODO Auto-generated catch block  
 	            e.printStackTrace();  
 	        }
 	}

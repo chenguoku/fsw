@@ -80,10 +80,10 @@ public class CourseServiceImpl implements CourseService {
 			}
 			//判断查询是不是空
 			if (question != null) {
-				sBuilder.append(" AND (c.name LIKE '%"+question+"%' OR c.`details` LIKE '%"+question+"%')");
+				sBuilder.append(" AND c.status = 1 AND (c.name LIKE '%"+question+"%' OR c.`details` LIKE '%"+question+"%')");
 				
 			}else {
-				sBuilder.append(" AND 1=1 AND c.status = 1");
+				sBuilder.append(" AND 1=1 AND c.status = 1 ");
 			}
 			
 			//判断排序是不是空
@@ -110,7 +110,7 @@ public class CourseServiceImpl implements CourseService {
 			int ceil = (int)Math.ceil(d);
 			
 			sResult.setData(result);
-			sResult.setPageCont(ceil);
+			sResult.setPageCount(ceil);
 			sResult.setMsg("正常");
 			sResult.setStatus(200);
 			
@@ -129,9 +129,12 @@ public class CourseServiceImpl implements CourseService {
 
 	public TbCourse selectCourseById(String courseId) {
 		
-		TbCourse result = courseMapper.selectByPrimaryKey(Integer.parseInt(courseId));
+		TbCourseExample courseExample = new TbCourseExample();
+		Criteria createCriteria = courseExample.createCriteria();
+		createCriteria.andIdEqualTo(Integer.parseInt(courseId));
+		List<TbCourse> selectByExampleWithBLOBs = courseMapper.selectByExampleWithBLOBs(courseExample);
 		
-		return result;
+		return selectByExampleWithBLOBs.get(0);
 	}
 
 	public List<TbCourse> selectCourseByCollection(HttpServletRequest request, HttpServletResponse response) {
@@ -162,6 +165,7 @@ public class CourseServiceImpl implements CourseService {
 		course.setImage("/image/course/0.jpg");
 		course.setUpdateTime(new Date());
 		course.setStatus(0);
+		course.setCollection(0);
 		
 		//插入课程
 		int insert = courseMapper.insert(course);
@@ -270,6 +274,43 @@ public class CourseServiceImpl implements CourseService {
 		int updateByPrimaryKeyWithBLOBs = courseMapper.updateByPrimaryKeyWithBLOBs(course);
 		
 		return FSWResult.ok(updateByPrimaryKeyWithBLOBs);
+	}
+
+	public FSWResult deleteTestPage(String id) {
+		
+		
+		
+		return null;
+	}
+
+	public FSWResult changeStatus(String id, String status) {
+		
+		if ("1".equals(status)) {
+			status = 1+"";
+		}else {
+			status = 0+"";
+		}
+		
+
+		TbCourse course = new TbCourse();
+		course.setId(Integer.parseInt(id));
+		course.setStatus(Integer.parseInt(status));
+		int updateByPrimaryKeySelective = courseMapper.updateByPrimaryKeySelective(course);
+		
+		if (updateByPrimaryKeySelective ==  0) {
+			return FSWResult.build(400, "没有找到课程");
+		}
+		return FSWResult.build(200, "成功");
+	}
+
+	public FSWResult removeCourse(String id) {
+		
+		int deleteByPrimaryKey = courseMapper.deleteByPrimaryKey(Integer.parseInt(id));
+		if (deleteByPrimaryKey == 0) {
+			return FSWResult.build(400, "没有找到课程");
+		}
+		
+		return FSWResult.build(200, "成功");
 	}
 
 	

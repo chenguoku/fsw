@@ -41,9 +41,11 @@ public class CommentsServiceImpl implements CommentsService {
 		SelectResult selectResult = new SelectResult();
 		//查询所有评论
 		TbCommentsExample commentsExample = new TbCommentsExample();
+		com.fsw.pojo.TbCommentsExample.Criteria criteria2 = commentsExample.createCriteria();
+		criteria2.andCourseIdEqualTo(Integer.parseInt(courseId));
 		List<TbComments> selectByExample = commentsMapper.selectByExample(commentsExample);
 		int commtentsSize = selectByExample.size();
-		double d = (double)commtentsSize/(double)(Integer.parseInt(count));
+		double d = (double)commtentsSize/(Integer.parseInt(count));
 		//所有评论
 		int ceil = (int)Math.ceil(d);
 		try {
@@ -60,7 +62,7 @@ public class CommentsServiceImpl implements CommentsService {
 			if (list == null || list.size() == 0) {
 				selectResult.setData(null);
 				selectResult.setMsg("没有找打评论");
-				selectResult.setPageCont(ceil);
+				selectResult.setPageCount(ceil);
 				selectResult.setStatus(404);
 				return selectResult;
 			}
@@ -82,8 +84,8 @@ public class CommentsServiceImpl implements CommentsService {
 			
 			//查询副评论
 			TbNextCommentsExample example = new TbNextCommentsExample();
-			Criteria criteria = example.createCriteria();
-			criteria.andCourseIdEqualTo(Integer.parseInt(courseId));
+			Criteria createCriteria = example.createCriteria();
+			createCriteria.andCourseIdEqualTo(Integer.parseInt(courseId));
 			example.setOrderByClause("create_time asc");
 			List<TbNextComments> nextList = nextCommentsMapper.selectByExampleWithBLOBs(example);
 			for (CommentPlus commentPlus : listPlus) {
@@ -98,7 +100,7 @@ public class CommentsServiceImpl implements CommentsService {
 			
 			selectResult.setData(listPlus);
 			selectResult.setMsg("comment");
-			selectResult.setPageCont(ceil);
+			selectResult.setPageCount(ceil);
 			selectResult.setStatus(200);
 			
 			return selectResult;
@@ -106,7 +108,7 @@ public class CommentsServiceImpl implements CommentsService {
 			e.printStackTrace();
 			selectResult.setData(null);
 			selectResult.setMsg("服务器错误");
-			selectResult.setPageCont(ceil);
+			selectResult.setPageCount(ceil);
 			selectResult.setStatus(500);
 			return selectResult;
 		}
@@ -251,6 +253,102 @@ public class CommentsServiceImpl implements CommentsService {
 			result.setMsg("服务器错误");
 			return result;
 		}
+		
+	}
+
+
+
+	public SelectResult selectAllComments(String count, String pageNow) {
+		
+/*		//查询所有评论
+				TbCommentsExample commentsExample = new TbCommentsExample();
+				List<TbComments> selectByExample = commentsMapper.selectByExample(commentsExample);
+				int commtentsSize = selectByExample.size();
+				double d = (double)commtentsSize/(double)(Integer.parseInt(count));
+				//所有评论
+				int ceil = (int)Math.ceil(d);
+				try {
+					
+					
+					//查询到主评论
+					StringBuilder sbBuilder = new StringBuilder();
+					sbBuilder.append(" course_id = "+courseId);
+					sbBuilder.append(" ORDER BY create_time DESC ");
+					sbBuilder.append(" LIMIT "+(Integer.parseInt(pageNow)*Integer.parseInt(count))+","+count+" ");
+					String sql = sbBuilder+"";
+					List<TbComments> list = myMapper.selectCommentsByCourseId(sql);*/
+		
+		SelectResult selectResult = new SelectResult();
+		//查询所有评论
+				TbCommentsExample commentsExample = new TbCommentsExample();
+				List<TbComments> selectByExample = commentsMapper.selectByExample(commentsExample);
+				int commtentsSize = selectByExample.size();
+				double d = (double)commtentsSize/(double)(Integer.parseInt(count));
+				//所有评论
+				int ceil = (int)Math.ceil(d);
+				try {
+					
+					
+					//查询到主评论
+					StringBuilder sbBuilder = new StringBuilder();
+					sbBuilder.append(" 1=1 ");
+					sbBuilder.append(" ORDER BY create_time DESC ");
+					sbBuilder.append(" LIMIT "+((Integer.parseInt(pageNow)-1)*Integer.parseInt(count))+","+count+" ");
+					String sql = sbBuilder+"";
+					List<TbComments> list = myMapper.selectCommentsByCourseId(sql);
+					
+					
+					if (list == null || list.size() == 0) {
+						selectResult.setData(null);
+						selectResult.setMsg("没有找打评论");
+						selectResult.setPageCount(ceil);
+						selectResult.setStatus(404);
+						return selectResult;
+					}
+					//转成CommentPlus
+					List<CommentPlus> listPlus = new ArrayList<CommentPlus>();
+					for (TbComments tbComments : list) {
+						CommentPlus commentPlus = new CommentPlus();
+						
+						commentPlus.setContent(tbComments.getContent());
+						commentPlus.setCourseId(tbComments.getCourseId());
+						commentPlus.setCreateTime(tbComments.getCreateTime());
+						commentPlus.setId(tbComments.getId());
+						commentPlus.setUserId(tbComments.getUserId());
+						commentPlus.setUserImage(tbComments.getUserImage());
+						commentPlus.setUserName(tbComments.getUserName());
+						
+						listPlus.add(commentPlus);
+					}
+					
+					//查询副评论
+					TbNextCommentsExample example2 = new TbNextCommentsExample();
+					List<TbNextComments> nextList = nextCommentsMapper.selectByExampleWithBLOBs(example2);
+					for (CommentPlus commentPlus : listPlus) {
+						List<TbNextComments> nextCommentsList = new ArrayList<TbNextComments>();
+						for (TbNextComments tbNextComments : nextList) {
+							if (commentPlus.getId() == tbNextComments.getCommentsId()) {
+								nextCommentsList.add(tbNextComments);
+							}
+						}
+						commentPlus.setList(nextCommentsList);
+					}
+					
+					selectResult.setData(listPlus);
+					selectResult.setMsg("comment");
+					selectResult.setPageCount(ceil);
+					selectResult.setStatus(200);
+					
+					return selectResult;
+				} catch (Exception e) {
+					e.printStackTrace();
+					selectResult.setData(null);
+					selectResult.setMsg("服务器错误");
+					selectResult.setPageCount(ceil);
+					selectResult.setStatus(500);
+					return selectResult;
+				}
+		
 		
 	}
 

@@ -209,6 +209,15 @@ public class UserServiceImpl implements UserService {
 		}
 		
 	}
+	public String updateName(String id,String name) {
+		//修改姓名
+		TbUserWithBLOBs record = new TbUserWithBLOBs();
+		record.setId(Integer.parseInt(id));
+		record.setName(name);
+		int updateByPrimaryKeySelective = userMapper.updateByPrimaryKeySelective(record);
+		return updateByPrimaryKeySelective+"";
+		
+	}
 
 
 	public String updateSex(String sex,HttpServletRequest request, HttpServletResponse response) {
@@ -224,6 +233,13 @@ public class UserServiceImpl implements UserService {
 			e.printStackTrace();
 			return 2+"";
 		}
+	}
+	public String updateSex(String id,String sex) {
+		TbUserWithBLOBs record = new TbUserWithBLOBs();
+		record.setId(Integer.parseInt(id));
+		record.setSex(sex);
+		int updateByPrimaryKeySelective = userMapper.updateByPrimaryKeySelective(record);
+		return updateByPrimaryKeySelective+"";
 	}
 
 
@@ -261,6 +277,13 @@ public class UserServiceImpl implements UserService {
 			e.printStackTrace();
 			return 2+"";
 		}
+	}
+	public String updateSchool(String id,String school) {
+		TbUserWithBLOBs record = new TbUserWithBLOBs();
+		record.setId(Integer.parseInt(id));
+		record.setSchool(school);
+		int updateByPrimaryKeySelective = userMapper.updateByPrimaryKeySelective(record);
+		return updateByPrimaryKeySelective+"";
 	}
 
 
@@ -334,6 +357,37 @@ public class UserServiceImpl implements UserService {
 		}
 	
 		return result;
+	}
+
+
+	public FSWResult selectUser(String name, String type) {
+		
+//		userMapper
+		TbUserExample example = new TbUserExample();
+		Criteria criteria = example.createCriteria();
+		if (! "".equals(name)) {
+			criteria.andNameEqualTo(name);
+		}
+		if (!"".equals(type)) {
+			criteria.andTypeEqualTo(type);
+		}
+		List<TbUserWithBLOBs> selectByExampleWithBLOBs = userMapper.selectByExampleWithBLOBs(example);
+		if (selectByExampleWithBLOBs == null || selectByExampleWithBLOBs.size() == 0) {
+			return FSWResult.build(400, "没有找到", selectByExampleWithBLOBs);
+		}
+		return FSWResult.build(200, "消息", selectByExampleWithBLOBs);
+	}
+
+
+	public FSWResult removeUser(String id) {
+		
+		int deleteByPrimaryKey = userMapper.deleteByPrimaryKey(Integer.parseInt(id));
+		
+		if ("".equals(deleteByPrimaryKey+"") || deleteByPrimaryKey == 0) {
+			return FSWResult.build(400, "没有找到用户");
+		}
+		
+		return FSWResult.build(200, "成功", null);
 	}
 
 

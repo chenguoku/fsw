@@ -52,4 +52,10 @@ public interface CommentsService {
 	 * @return
 	 */
 	FSWResult deleteComment(String id);
+	
+	/**
+	 * 查询所有评论
+	 * @return
+	 */
+	SelectResult selectAllComments(String count, String pageNow);
 }

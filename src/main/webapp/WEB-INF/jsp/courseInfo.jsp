@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>${course.name }</title>
-<link href="${pageContext.request.contextPath }/css/courseInfo.css" rel="stylesheet"></head>
+	<link href="${pageContext.request.contextPath }/css/courseInfo.css" rel="stylesheet"></head>
 
 <body>
     <!--头部导航开始-->
@@ -20,8 +20,8 @@
         <div class="courseInfo-wrap">
             <!-- 导航 -->
             <h3 class="courseInfo-nav">
-                <a href="${pageContext.request.contextPath }">首页</a>&nbsp;&gt;&nbsp;
-                <a href="${pageContext.request.contextPath }">兴趣生活</a>&nbsp;&gt;&nbsp;
+                <a href="http://www.fashengwang.com">首页</a>&nbsp;&gt;&nbsp;
+                <a href="http://www.fashengwang.com/goSelect.html?type=${course.type }">兴趣生活</a>&nbsp;&gt;&nbsp;
                 <span>${course.name }</span>
             </h3>
             <!-- 上方信息部分 -->

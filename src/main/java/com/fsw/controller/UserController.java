@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -21,6 +22,59 @@ public class UserController {
 
 	@Autowired
 	private UserService userService;
+	
+	@RequestMapping("remove/user")
+	@ResponseBody
+	public FSWResult removeUser(String id) {
+		
+		FSWResult removeUser = userService.removeUser(id);
+		
+		return removeUser;
+	}
+	
+	@RequestMapping("managerStudentInfo")
+	public String managerStudentInfo(String userId,String username,String sex,String school) {
+		
+		//修改数据
+		if (username != null) {
+			userService.updateName(userId,username);
+		}
+		if (sex != null) {
+			userService.updateSex(userId,sex);
+		}
+		if (school != null) {
+			userService.updateSchool(userId,school);
+		}
+		
+		
+		return "redirect:goBackstageManagement.html";
+	}
+	@RequestMapping("managerTeacherInfo")
+	public String managerTeacherInfo(String userId,String username,String sex,String school) {
+		
+		//修改数据
+		if (username != null) {
+			userService.updateName(userId,username);
+		}
+		if (sex != null) {
+			userService.updateSex(userId,sex);
+		}
+		if (school != null) {
+			userService.updateSchool(userId,school);
+		}
+		
+		
+		return "redirect:goTeacherManagement.html";
+	}
+	
+	@RequestMapping("select/user")
+	@ResponseBody
+	public FSWResult selectUser(@RequestParam(defaultValue="")String name ,@RequestParam(defaultValue="")String type) {
+		
+		FSWResult selectUser = userService.selectUser(name,type);
+		
+		return selectUser;
+	}
 	
 	/**
 	 * 取申请讲课页面
@@ -49,7 +103,7 @@ public class UserController {
 			return "userInfo";
 		}
 		
-		FSWResult updateImg = userService.updateImg(imgFile, request, response);
+		userService.updateImg(imgFile, request, response);
 		
 		return "userInfo";
 	}
@@ -148,6 +202,11 @@ public class UserController {
 			model.addAttribute("err", result.getMsg());
 			return "login";
 		}
+		
+		if("3".equals(((TbUserWithBLOBs)request.getSession().getAttribute("loginUser")).getType())) {
+			return "backstageManagement";
+		}
+		
 		
 		return "redirect:index.html";
 	}

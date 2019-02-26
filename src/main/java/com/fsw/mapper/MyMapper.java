@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 
 import com.fsw.pojo.TbComments;
 import com.fsw.pojo.TbCourse;
+import com.fsw.pojo.TbTestPage;
 
 public interface MyMapper {
 	List<TbCourse> getCourseListType3();
@@ -44,4 +45,11 @@ public interface MyMapper {
 	 * @return
 	 */
 	List<Integer> selectHotComments(@Param(value="sql")String sql);
+	
+	/**
+	 * 查询试卷最大id
+	 * @param sql
+	 * @return
+	 */
+	Integer selectMaxTestPage(@Param(value="sql")String sql);
 }

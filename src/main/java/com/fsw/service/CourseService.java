@@ -96,4 +96,19 @@ public interface CourseService {
 	 */
 	FSWResult updateCourse(TbCourse course,String name,String type,String info,String teacher,String status);
 	
+	/**
+	 * 改变课程状态
+	 * @param id
+	 * @param status
+	 * @return
+	 */
+	FSWResult changeStatus(String id,String status);
+	/**
+	 * 删除课程
+	 * @param id
+	 * @return
+	 */
+	FSWResult removeCourse(String id);
+	
+	
 }

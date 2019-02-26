@@ -6,9 +6,9 @@
             <div class="ft-left">
                 <p class="ft-tt">发生网，基于听障生打造的智能在线学习网站。</p>
                 <div class="ft-list">
-                    <a href="#" class="ft-item">意见反馈</a>
+                    <a href="${pageContext.request.contextPath }/adviceOur.html" target="_blank" class="ft-item">意见反馈</a>
                     <a href="#" class="ft-item">广告服务</a>
-                    <a href="#" class="ft-item">关于我们</a>
+                    <a href="${pageContext.request.contextPath }/aboutUs.html" target="_blank" class="ft-item">关于我们</a>
                     <a href="#" class="ft-item">合作入口</a>
                     <a href="#" class="ft-item">服务条款</a>
                 </div>

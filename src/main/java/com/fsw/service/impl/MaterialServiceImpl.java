@@ -1,6 +1,5 @@
 package com.fsw.service.impl;
 
-import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -78,7 +77,7 @@ public class MaterialServiceImpl implements MaterialService {
 			
 			try {
 				//生成新文件名
-				String newName = oldName;
+				String newName = IDUtils.genImageName();
 				//获得文件路径
 				filePath = request.getSession().getServletContext().getRealPath(materialURL);
 				
@@ -99,7 +98,7 @@ public class MaterialServiceImpl implements MaterialService {
 				fos.flush();
 				
 				//将视频路径传到数据库
-				String imageUrl = materialURL+newName;
+				String imageUrl = newName;
 				
 				material.setUrl(imageUrl);
 				//新建素材
@@ -176,8 +175,7 @@ public class MaterialServiceImpl implements MaterialService {
 				fos.flush();
 				
 				//将视频路径传到数据库
-				String imageUrl = materialURL+newName;
-				
+				String imageUrl = newName;
 				material.setUrl(imageUrl);
 				//修改素材
 				int whether = materialMapper.updateByPrimaryKey(material);
@@ -283,10 +281,6 @@ public class MaterialServiceImpl implements MaterialService {
 			File file = new File(fileName);
 	        FileInputStream fis = new FileInputStream(file);
 	        
-//	        InputStream bis = new BufferedInputStream(new FileInputStream(new File(fileName)));  
-//	        System.out.println(bis);
-	        //假如以中文名下载的话  
-	        // 取得文件名。new String(filename.getBytes("UTF-8"), "ISO8859-1")
             String filename = material.getName();
             // 取得文件的后缀名。
             String[] split = (material.getUrl()).split("\\.");
@@ -309,39 +303,6 @@ public class MaterialServiceImpl implements MaterialService {
 		} catch (Exception e) {
 			e.printStackTrace();
 		} 
-		
-		/*
-		try {
-			//获得文件路径
-			String filePath = request.getSession().getServletContext().getRealPath(material.getUrl());
-            // path是指欲下载的文件的路径。
-            File file = new File(filePath);
-            // 取得文件名。
-            String filename = material.getName();
-            // 取得文件的后缀名。
-            String[] split = (material.getUrl()).split("\\.");
-            String ext = split[split.length-1];
-            
-            // 以流的形式下载文件。
-            InputStream fis = new BufferedInputStream(new FileInputStream(filePath));
-            byte[] buffer = new byte[fis.available()];
-            fis.read(buffer);
-            fis.close();
-            // 清空response
-            response.reset();
-            // 设置response的Header
-            response.addHeader("Content-Disposition", "attachment;filename=" + new String(filename.getBytes("UTF-8"), "ISO8859-1") +"."+ext);
-            response.addHeader("Content-Length", "" + file.length());
-            OutputStream toClient = new BufferedOutputStream(response.getOutputStream());
-            response.setContentType("application/octet-stream");
-            toClient.write(buffer);
-            toClient.flush();
-            toClient.close();
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }*/
-		
-		
 	}
 
 	

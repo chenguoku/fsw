@@ -5,15 +5,16 @@ import com.fsw.utils.FSWResult;
 public class SelectResult extends FSWResult {
 
 	//总页数
-	private Integer pageCont;
+	private Integer pageCount;
 
-	public Integer getPageCont() {
-		return pageCont;
+	public Integer getPageCount() {
+		return pageCount;
 	}
 
-	public void setPageCont(Integer pageCont) {
-		this.pageCont = pageCont;
+	public void setPageCount(Integer pageCount) {
+		this.pageCount = pageCount;
 	}
-	
+
+
 	
 }

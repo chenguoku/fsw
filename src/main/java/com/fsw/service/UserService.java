@@ -77,6 +77,7 @@ public interface UserService {
 	 * @return
 	 */
 	String updateName(String name,HttpServletRequest request, HttpServletResponse response);
+	String updateName(String id,String name);
 	
 	/**
 	 * 修改性别
@@ -84,6 +85,7 @@ public interface UserService {
 	 * @return
 	 */
 	String updateSex(String sex,HttpServletRequest request, HttpServletResponse response);
+	String updateSex(String id,String sex);
 	/**
 	 * 修改密码
 	 * @param newPasswd
@@ -97,6 +99,7 @@ public interface UserService {
 	 * @return
 	 */
 	String updateSchool(String school,HttpServletRequest request, HttpServletResponse response);
+	String updateSchool(String id,String school);
 	/**
 	 * 更改头像
 	 * @param imgFile
@@ -105,4 +108,20 @@ public interface UserService {
 	 * @return
 	 */
 	FSWResult updateImg(MultipartFile imgFile,HttpServletRequest request,HttpServletResponse response);
+	
+	/**
+	 * 查询用户
+	 * @param name
+	 * @param type
+	 * @return
+	 */
+	FSWResult selectUser(String name,String type);
+	
+	/**
+	 * 删除user
+	 * @param id
+	 * @return
+	 */
+	FSWResult removeUser(String id);
+	
 }

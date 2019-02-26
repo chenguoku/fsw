@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.fsw.mapper.MyMapper;
 import com.fsw.mapper.TbTestPageMapper;
 import com.fsw.mapper.TbTestQuestionMapper;
 import com.fsw.pojo.TbTestPage;
@@ -22,6 +23,8 @@ public class TestPageServiceImpl implements TestPageService {
 	private TbTestPageMapper testPageMapper;
 	@Autowired 
 	private TbTestQuestionMapper questionMapper;
+	@Autowired
+	private MyMapper myMapper;
 	
 	public FSWResult selectTestPageByCourseId(Integer courseId) {
 		try {
@@ -31,7 +34,7 @@ public class TestPageServiceImpl implements TestPageService {
 			example.setOrderByClause("findex asc");
 			List<TbTestPage> list = testPageMapper.selectByExample(example);
 			if (list == null || list.size() == 0) {
-				return FSWResult.build(404,"没有找到课程", null);
+				return FSWResult.build(404,"没有找到试卷", null);
 			}
 			return FSWResult.build(200, "testpage", list);
 			
@@ -64,6 +67,38 @@ public class TestPageServiceImpl implements TestPageService {
 			return FSWResult.build(500, "服务器错误",null);
 		}
 		
+	}
+
+	public FSWResult deleteTestPage(String id) {
+		try {
+			//先删除 试卷 
+			testPageMapper.deleteByPrimaryKey(Integer.parseInt(id));
+			//在删除 试题
+			TbTestQuestionExample example = new TbTestQuestionExample();
+			com.fsw.pojo.TbTestQuestionExample.Criteria criteria = example.createCriteria();
+			criteria.andTestPageIdEqualTo(Integer.parseInt(id));
+			questionMapper.deleteByExample(example);
+			
+			return FSWResult.build(200, "成功");
+		} catch (Exception e) {
+			return FSWResult.build(400, "没有找到试卷");
+		}
+	}
+
+	public Integer insertTestPage(TbTestPage testPage) {
+		
+		testPageMapper.insert(testPage);
+		String sql = " ORDER BY id DESC LIMIT 0,1 ";
+		Integer selectMaxTestPage = myMapper.selectMaxTestPage(sql);
+		
+		
+		return selectMaxTestPage;
+	}
+
+	public Integer insertTestQuestion(TbTestQuestionWithBLOBs tbTestQuestion) {
+		int insert = questionMapper.insert(tbTestQuestion);
+		
+		return insert;
 	}
 
 }

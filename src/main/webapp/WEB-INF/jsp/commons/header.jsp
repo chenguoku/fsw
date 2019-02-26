@@ -12,7 +12,7 @@
                 <input type="submit" class="hd-btn">
             </form>
             <nav class="hd-nav">
-                <a href="${pageContext.request.contextPath }" class="hd-nav-item">首页</a>
+                <a href="http://www.fashengwang.com" class="hd-nav-item">首页</a>
                 
                 <c:if test="${loginUser.type == 1 }">
               	 	<a href="${pageContext.request.contextPath }/goMyStudy.html" target="_blank" class="hd-nav-item">我的学习</a>

@@ -1,6 +1,5 @@
 package com.fsw.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.fsw.pojo.TbComments;
 import com.fsw.pojo.TbCourse;
@@ -34,13 +32,31 @@ public class CourseController {
 	@Autowired
 	private UserService userService;
 	
+	@RequestMapping("remove/course")
+	@ResponseBody
+	public FSWResult removeCourse(String id) {
+		
+		FSWResult removeCourse = courseService.removeCourse(id);
+		return removeCourse;
+		
+	}
 	
+	@RequestMapping("course/status")
+	@ResponseBody
+	public FSWResult courseStatus(String id ,String status ) {
+		FSWResult changeStatus = courseService.changeStatus(id,status);
+		return changeStatus;
+	}
 	
 	
 	@RequestMapping("updateCourseInfo")
 	public String updateCourseInfo(Model model,String courseId,String name,String type,
 			String info,String teacher,String status) {
 //		name=测试&type=分类名称&info=1111&teacher=2222&on-off=on
+		
+		if ("".equals(courseId) || courseId.length() == 0) {
+			return "redirect:goSetCourse.html";
+		}
 		
 		TbCourse course = courseService.selectCourseById(courseId);
 		
@@ -88,7 +104,7 @@ public class CourseController {
 	@RequestMapping("createCourse")
 	public String createCourse(String name,Model model , HttpServletRequest request , HttpServletResponse response) {
 		
-		FSWResult result = courseService.createCourse(name,request,response);
+		courseService.createCourse(name,request,response);
 		
 		return "redirect:goCourseManager.html";
 	}
